@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #000;
+  color: #0ff;
+}
+
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #001a3a 0%, #000000 100%);
+  overflow: hidden;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.jarvis-text {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+.jarvis-text span {
+  display: inline-block;
+  opacity: 0;
+  animation: glow 2s ease-in-out infinite alternate;
+  animation-delay: calc(var(--order) * 0.2s);
+}
+
+.jarvis-text span:nth-child(1) { --order: 1; }
+.jarvis-text span:nth-child(2) { --order: 2; }
+.jarvis-text span:nth-child(3) { --order: 3; }
+.jarvis-text span:nth-child(4) { --order: 4; }
+.jarvis-text span:nth-child(5) { --order: 5; }
+.jarvis-text span:nth-child(6) { --order: 6; }
+
+@keyframes glow {
+  0% { opacity: 0.2; text-shadow: none; }
+  100% { opacity: 1; text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff; }
+}
+
+.arc-reactor {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  box-shadow: 0 0 50px #0ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.arc-reactor.loading {
+  animation: pulse 2s infinite;
+}
+
+.circle-1, .circle-2, .circle-3, .circle-4, .circle-5 {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 255, 255, 0.3);
+}
+
+.circle-1 { top: 5%; left: 5%; right: 5%; bottom: 5%; }
+.circle-2 { top: 15%; left: 15%; right: 15%; bottom: 15%; }
+.circle-3 { top: 25%; left: 25%; right: 25%; bottom: 25%; }
+.circle-4 { top: 35%; left: 35%; right: 35%; bottom: 35%; }
+.circle-5 { top: 45%; left: 45%; right: 45%; bottom: 45%; }
+
+.inner-circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 30%;
+  background-color: rgba(0, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.core {
+  width: 70%;
+  height: 70%;
+  background-color: #0ff;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
+}
+
+.arc-reactor::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, rgba(0, 255, 255, 0) 70%);
+}
+
+.arc-reactor.listening .core {
+  animation: listeningPulse 1s infinite alternate;
+}
+
+.arc-reactor.speaking .core {
+  animation: speakingPulse 0.5s infinite alternate;
+}
+
+.response-text {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+  max-width: 80%;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.talk-button {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: rgba(0, 255, 255, 0.2);
+  border: 2px solid #0ff;
+  color: #0ff;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.talk-button:hover {
+  background-color: rgba(0, 255, 255, 0.4);
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 30px rgba(0, 255, 255, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 255, 0); }
+}
+
+@keyframes listeningPulse {
+  from { background-color: #0ff; }
+  to { background-color: #ff0000; }
+}
+
+@keyframes speakingPulse {
+  0% { box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff; }
+  100% { box-shadow: 0 0 40px #0ff, 0 0 80px #0ff, 0 0 120px #0ff; }
+}
+
+@media (max-width: 500px) {
+  .arc-reactor {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .jarvis-text {
+    font-size: 2rem;
+  }
+}
